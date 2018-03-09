@@ -1,4 +1,3 @@
-const clone = require('clone');
 const ejs = require('ejs');
 const htmlmin = require('html-minifier');
 const loaderUtils = require('loader-utils');
@@ -19,7 +18,7 @@ const schema = {
 module.exports = function (source) {
   this.cacheable && this.cacheable();
 
-  const options = clone(loaderUtils.getOptions(this));
+  const options = this.query || {};
   validateOptions(schema, options, 'EJS Loader');
 
   const filename = loaderUtils.getRemainingRequest(this).replace(/^!/, "");

@@ -24,7 +24,6 @@
   },
   "homepage": "https://github.com/piuccio/ejs-compiled-loader",
   "dependencies": {
-    "clone": "^2.1.1",
     "html-minifier": "^3",
     "loader-utils": "^1.1.0",
     "schema-utils": "^0.4.5"
