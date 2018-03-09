@@ -1,38 +1,49 @@
-var ejs = require('ejs'),
-  UglifyJS = require('uglify-js'),
-  utils = require('loader-utils'),
-  path = require('path'),
-  htmlmin = require('html-minifier'),
-  merge = require('merge');
+const clone = require('clone');
+const ejs = require('ejs');
+const htmlmin = require('html-minifier');
+const loaderUtils = require('loader-utils');
+const validateOptions = require('schema-utils');
 
+const schema = {
+  type: 'object',
+  properties: {
+    minify: {
+      type: 'boolean',
+    },
+    htmlminOptions: {
+      type: 'object',
+    },
+  },
+};
 
 module.exports = function (source) {
   this.cacheable && this.cacheable();
 
-  var query = typeof this.query === 'object' ? this.query : utils.parseQuery(this.query);
-  var opts = merge(this.options['ejs-compiled-loader'] || {}, query);
-  opts.client = true;
+  const options = clone(loaderUtils.getOptions(this));
+  validateOptions(schema, options, 'EJS Loader');
 
-  // Skip compile debug for production when running with
-  // webpack --optimize-minimize
-  if (this.minimize && opts.compileDebug === undefined) {
-    opts.compileDebug = false;
-  }
+  const filename = loaderUtils.getRemainingRequest(this).replace(/^!/, "");
 
-  // Use filenames relative to working dir, which should be project root
-  opts.filename = path.relative(process.cwd(), this.resourcePath);
+  const defaults = {
+    compileDebug: false,
+  };
 
-  if (opts.htmlmin) {
-    source = htmlmin.minify(source, opts['htmlminOptions'] || {});
-  }
+  const ejsOptions = Object.assign(defaults, options, {
+    client: true,
+    filename: filename,
+    htmlmin: undefined,
+    htmlminOptions: undefined,
+  });
 
-  var template = ejs.compile(source, opts);
+  try {
+    if (options.minify) {
+      source = htmlmin.minify(source, options.htmlminOptions);
+    }
 
-  // Beautify javascript code
-  if (!this.minimize && opts.beautify !== false) {
-    var ast = UglifyJS.parse(template.toString());
-    ast.figure_out_scope();
-    template = ast.print_to_string({beautify: true});
+    var template = ejs.compile(source, ejsOptions);
+  } catch (e) {
+    this.callback(e);
+    return;
   }
 
   return 'module.exports = ' + template;

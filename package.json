@@ -1,14 +1,15 @@
 {
-  "name": "ejs-compiled-loader",
-  "version": "2.2.0",
+  "name": "@piuccio/ejs-compiled-loader",
+  "version": "3.0.0",
   "description": "EJS webpack loader (without frontend dependencies)",
   "main": "index.js",
   "scripts": {
-    "test": "cd test && ../node_modules/.bin/webpack && node bundle.js"
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/bazilio91/ejs-compiled-loader.git"
+    "url": "https://github.com/piuccio/ejs-compiled-loader.git"
   },
   "keywords": [
     "ejs",
@@ -19,18 +20,23 @@
   "author": "Vasily Ostanin <bazilio91@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/bazilio91/ejs-compiled-loader/issues"
+    "url": "https://github.com/piuccio/ejs-compiled-loader/issues"
   },
-  "homepage": "https://github.com/bazilio91/ejs-compiled-loader",
+  "homepage": "https://github.com/piuccio/ejs-compiled-loader",
   "dependencies": {
-    "ejs": "^2.0.0",
+    "clone": "^2.1.1",
     "html-minifier": "^3",
-    "loader-utils": "^0.2.7",
-    "merge": "^1.2.0",
-    "uglify-js": "~2.6.1"
+    "loader-utils": "^1.1.0",
+    "schema-utils": "^0.4.5"
   },
   "devDependencies": {
-    "node-libs-browser": "^0.5.0",
-    "webpack": "^1.9.4"
+    "ejs": "^2.5.7",
+    "jest": "^22.4.2",
+    "memory-fs": "^0.4.1",
+    "webpack": "^4.1.1",
+    "webpack-cli": "^2.0.10"
+  },
+  "peerDependencies": {
+    "ejs": "^2.0.0"
   }
 }
