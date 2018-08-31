@@ -1,6 +1,6 @@
 {
-  "name": "@piuccio/ejs-compiled-loader",
-  "version": "3.0.0",
+  "name": "ua-snap/ejs-compiled-loader",
+  "version": "3.0.1",
   "description": "EJS webpack loader (without frontend dependencies)",
   "main": "index.js",
   "scripts": {
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/piuccio/ejs-compiled-loader.git"
+    "url": "https://github.com/ua-snap/ejs-compiled-loader.git"
   },
   "keywords": [
     "ejs",
@@ -17,12 +17,11 @@
     "loader",
     "template"
   ],
-  "author": "Vasily Ostanin <bazilio91@gmail.com>",
+  "author": [
+    "Vasily Ostanin <bazilio91@gmail.com>",
+    "Bruce Crevensten <bruce.crevensten@gmail.com>"
+  ],
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/piuccio/ejs-compiled-loader/issues"
-  },
-  "homepage": "https://github.com/piuccio/ejs-compiled-loader",
   "dependencies": {
     "html-minifier": "^3",
     "loader-utils": "^1.1.0",
@@ -32,7 +31,7 @@
     "ejs": "^2.5.7",
     "jest": "^22.4.2",
     "memory-fs": "^0.4.1",
-    "webpack": "^4.1.1",
+    "webpack": "^4.17.1",
     "webpack-cli": "^2.0.10"
   },
   "peerDependencies": {
