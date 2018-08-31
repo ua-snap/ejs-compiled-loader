@@ -38,13 +38,13 @@ module.exports = function (source) {
     if (options.minify) {
       source = htmlmin.minify(source, options.htmlminOptions);
     }
+    var template = ejs.compile(source, ejsOptions);
 
     // Handle child templates
-    if (template.dependencies && template.dependencies.length > 0) {
+    if (template.dependencies.length > 0) {
       template.dependencies.map(dep => this.addDependency(dep));
     }
 
-    var template = ejs.compile(source, ejsOptions);
   } catch (e) {
     this.callback(e);
     return;
